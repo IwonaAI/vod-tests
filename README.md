@@ -13,6 +13,24 @@ Opis testu: Test odpytuje endpoint z frazą „the pickup”, sprawdza status co
 
 Problemy na które się natknęłam: Serwer wymagał nagłówka User-Agent, bez tego zwracany był błąd 403  
 
+## Test E2E  
+
+Projekt testów automatycznych E2E dla serwisu https://www.vod.film z wykorzystaniem Python + Selenium w konwencji Page Object Model (POM)  
+Wybieram Selenium ze względu na większą prostotę i jego dłuższą obecność na rynku. Choć Playwright zyskuje coraz większą popularność na co również zwracam szczególną uwagę.
+
+Uruchomienie:  
+
+powershell  
+
+python -m venv .venv  
+
+.venv\Scripts\Activate.ps1  
+
+pip install -r requirements.txt  
+
+pytest -vv  
+
+
 ## Testowanie manualne – Raport błędu nr 1 
 
 ID: jira-01-427  
@@ -81,6 +99,49 @@ Osoba zgłaszająca: Iwona Gotowała
 Przypisane do: Frontend/Backend Developer  
 
 Załącznik: Produkcje.jpg  
+
+## SQL  
+
+Zapytanie SQL zależy od struktury bazy danych, czyli od tego jakie baza danych zawiera tabele i kolumny. Zakładając pewien typowy model:  
+
+- film (film.id, film.title…)
+  
+- category (category.id, category.name…)
+  
+Zapytanie SQL będzie wyglądało następująco:  
+
+
+SELECT  
+
+  f.id AS film_id,  
+  
+  f.title AS film_title,  
+  
+  c.id AS category_id,  
+  
+  c.name AS category_name  
+  
+FROM film f  
+
+JOIN film_category fc  
+
+  ON f.id = fc.film_id  
+  
+JOIN category c  
+
+  ON fc.category_id = c.id  
+  
+WHERE f.title = 'The Pickup';  
+
+Opis kroków w zapytaniu  
+
+•	Kroki to połączenie tabel film i film_category aby dostać powiązania między filmem a kategoriami.  
+
+•	Następnie łączenie z tabelą kategorii żeby poznać nazwy kategorii.  
+
+•	Na koniec filtrowanie po tytule filmu żeby sprawdzić tylko ten konkretny film  
+
+
 
 
 
