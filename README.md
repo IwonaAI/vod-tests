@@ -1,6 +1,6 @@
 # vod-tests
 
-## Test API:
+## Test API
 Url: https://vod.film/search-route  
 
 Status code: 200 OK  
